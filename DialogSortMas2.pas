@@ -1,10 +1,10 @@
-unit DialogSortMas;
+unit DialogSortMas2;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+  Dialogs, StdCtrls, ExtCtrls;
 
 type
   TForm2 = class(TForm)
@@ -12,8 +12,10 @@ type
     sdlg: TSaveDialog;
     Open: TButton;
     Save: TButton;
+    tme: TTimer;
     procedure OpenClick(Sender: TObject);
     procedure SaveClick(Sender: TObject);
+    procedure tmeTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,6 +27,7 @@ var
   f,ff:textfile;
   i,x:integer;
 implementation
+   uses Dimini;
 type
   mas=array[1..100] of real;
 var
@@ -49,6 +52,8 @@ begin
    a:=j;
  min:=a;
 end;
+
+
 procedure TForm2.OpenClick(Sender: TObject);
 begin
  if odlg.Execute=true then
@@ -74,6 +79,13 @@ begin
     closefile(ff);
     closefile(f);
    end;
+end;
+
+procedure TForm2.tmeTimer(Sender: TObject);
+begin
+  form3.Show;
+  form2.Hide;
+  tme.Enabled:=false;
 end;
 
 end.
